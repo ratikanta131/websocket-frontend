@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-input placeholder='Enter Input' #message></ion-input>
+    <ion-button primary (click)="sendMessage(message)">Send</ion-button>
+
+    <ion-list>
+      <ion-item *ngFor="let m of messages">
+        {{m}}
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

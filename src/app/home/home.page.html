@@ -9,7 +9,16 @@
 <ion-content>
   <div class="ion-padding">
     <ion-input placeholder='Enter Input' #message></ion-input>
-    <ion-button primary (click)="sendMessage(message)">Send</ion-button>
+    <ion-button primary (click)="subscribeToCrimeUser1()">User 1 Subscribe Crime</ion-button>
+    <ion-button primary (click)="subscribeToCrimeUser2()">User 2 Subscribe Crime</ion-button>
+    <ion-button primary (click)="publishCrimeNews(message)">Publish Crime News</ion-button>
+
+    <ion-button primary (click)="subscribeToMyAdminQueue(message)">Subscribe To Admin Queue</ion-button>
+    <ion-button primary (click)="sendMessageToAdmin(message)">Send Msg To Admin Queue</ion-button>
+
+    <ion-button primary (click)="subscribeToMyRatikantaQueue(message)">Subscribe To Ratikanta Queue</ion-button>
+    <ion-button primary (click)="sendMessageToRatikanta(message)">Send Msg To Ratikanta Queue</ion-button>
+
 
     <ion-list>
       <ion-item *ngFor="let m of messages">

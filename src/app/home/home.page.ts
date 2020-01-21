@@ -27,16 +27,65 @@ export class HomePage implements OnInit {
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({}, (frame) => {
-      that.stompClient.subscribe( '/chat', (message) => {
-        if (message.body) {
-          this.messages.push(message.body);
-        }
-      });
+      // that.stompClient.subscribe( '/topic/chat', (message) => {
+      //   if (message.body) {
+      //     this.messages.push(message.body);
+      //   }
+      // });
     });
   }
 
-  sendMessage(message) {
-    this.stompClient.send('/app/send/message' , {}, message.value);
+
+  subscribeToCrimeUser1(message) {
+    this.stompClient.subscribe( '/topic/crime', (message) => {
+      if (message.body) {
+        console.log('Message from crime topic for user 1 : ' + message.body);
+        this.messages.push('Message from crime topic for user 1 : ' + message.body);
+      }
+      });
+  }
+
+  subscribeToCrimeUser2(message) {
+    this.stompClient.subscribe( '/topic/crime', (message) => {
+      if (message.body) {
+        console.log('Message from crime topic for user 2 : ' + message.body);
+        this.messages.push('Message from crime topic for user 2 : ' + message.body);
+      }
+    });
+
+    
+  }
+
+
+  subscribeToMyAdminQueue(){
+    this.stompClient.subscribe( '/queue/toadmin', (message) => {
+      if (message.body) {
+        console.log('Message only to admin : ' + message.body);
+        this.messages.push('Message only to admin : ' + message.body);
+      }
+    });
+  }
+
+
+  subscribeToMyRatikantaQueue(){
+    this.stompClient.subscribe( '/queue/toratikanta', (message) => {
+      if (message.body) {
+        console.log('Message only to ratikanta : ' + message.body);
+        this.messages.push('Message only to ratikanta : ' + message.body);
+      }
+    });
+  }
+
+  publishCrimeNews(message) {
+    this.stompClient.send('/app/send/msg/tocrime' , {}, message.value);
+  }
+
+  sendMessageToAdmin(message) {
+    this.stompClient.send('/app/send/msg/toadmin' , {}, message.value);
+  }
+
+  sendMessageToRatikanta(message) {
+    this.stompClient.send('/app/send/msg/toratikanta' , {}, message.value);
   }
 
 }
